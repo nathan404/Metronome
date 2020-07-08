@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import sound from './sound.js';
 import duckAccent from './duckAccent.js';
 import duckBeat from './duckBeat.js';
 
@@ -13,7 +12,6 @@ class Metronome extends Component {
             bpm: 120,
             beatsPerMeasure: 4
         }
-
     }
 
     playClick = () => {
