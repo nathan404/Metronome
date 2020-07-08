@@ -16,19 +16,16 @@ class Metronome extends Component {
 
     }
 
-    handleBpmChange = event => {
-        const bpm = event.target.value;
-
-        if(this.state.on){
-            clearInterval(this.clock);
-            this.clock = setInterval(this.playClick, (60 / bpm) * 1000);
-            this.setState({
-                count: 0,
-                bpm
-            });
+    playClick = () => {
+        const {count, beatsPerMeasure} = this.state;
+        if(count % beatsPerMeasure === 0){
+            duckAccent.play();
         } else {
-            this.setState({bpm});
+            duckBeat.play();
         }
+        this.setState(state => ({
+            count: (state.count + 1) % state.beatsPerMeasure
+        }));
     }
 
     startStop = () => {
@@ -46,17 +43,19 @@ class Metronome extends Component {
         }
     }
     
-    playClick = () => {
-        const {count, beatsPerMeasure} = this.state;
 
-        if(count % beatsPerMeasure === 0){
-            duckAccent.play();
+    handleBpmChange = event => {
+        const bpm = event.target.value;
+        if(this.state.on){
+            clearInterval(this.clock);
+            this.clock = setInterval(this.playClick, (60 / bpm) * 1000);
+            this.setState({
+                count: 0,
+                bpm
+            });
         } else {
-            duckBeat.play();
+            this.setState({bpm});
         }
-        this.setState(state => ({
-            count: (state.count + 1) % state.beatsPerMeasure
-        }));
     }
 
     render(){
