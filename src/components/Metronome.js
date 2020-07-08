@@ -1,5 +1,10 @@
-// import React from 'react';
+import React from 'react';
 
-// Metronome
+const Metronome = (props) => {
 
-// export default Metronome;
+    return(
+        <h3>Hello World</h3>
+    )
+}
+
+export default Metronome;
