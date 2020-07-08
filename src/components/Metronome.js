@@ -2,4 +2,4 @@ import React from 'react';
 
 // Metronome
 
-export default Metronome;
+// export default Metronome;
