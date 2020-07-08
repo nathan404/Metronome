@@ -2,10 +2,23 @@ import React, { Component } from 'react';
 
 class Metronome extends Component {
 
-    render() {
+    constructor(props){
+        super(props);
+        this.state = {
+            on: false,
+            count: 0,
+            bpm: 120,
+            beatsPerMeasure: 4
+        }
+    }
 
-        let bpm = 120;
-        let on = false;
+    handleBpmChange = event => {
+        const bpm = event.target.value;
+        this.setState({bpm});
+    }
+
+    render() {
+        const {on, bpm} = this.state;
 
         return (
             <div className="metronome">
@@ -16,6 +29,7 @@ class Metronome extends Component {
                     min="40"
                     max="300"
                     value={bpm}
+                    onChange={this.handleBpmChange}
                     />
                 </div>
             <button>
