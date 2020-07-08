@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Metronome from '../components/Metronome';
+// import Metronome from '../components/Metronome';
 
 class MetronomeContainer extends Component{
     constructor(props){
@@ -8,7 +8,13 @@ class MetronomeContainer extends Component{
             on: false,
             bpm: 120
         }
-        
+    }
+    render(){
+        return(
+            <div>
+                HELLOworld
+            </div>
+        )
     }
 }
 
