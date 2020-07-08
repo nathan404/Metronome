@@ -12,11 +12,13 @@
 }
 
 .metronome button {
-  background: #C94D46;
+  background: #46bac9;
   padding: 10px;
-  border: 1px solid #832420;
-  border-radius: 2px;
+  border: 1px outset #5a8aaa;
+  border-radius: 8px;
   width: 100px;
   color: #fff;
   font-size: 18px;
+  text-shadow: 1px 1px 3px grey;
+  box-shadow: 1px 1px 10px rgb(91, 187, 243);
 }

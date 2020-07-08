@@ -1,49 +1,70 @@
 import React, { Component } from 'react';
-// import duckAccent from './DuckAccent.mp3';
-// import duckBeat from './DuckBeat.mp3';
 import sound from './sound.js';
+import duckAccent from './duckAccent.js';
+import duckBeat from './duckBeat.js';
 
 class Metronome extends Component {
 
     constructor(props){
         super(props);
         this.state = {
-            on: true,
+            on: false,
             count: 0,
             bpm: 120,
             beatsPerMeasure: 4
         }
 
-        // this.duckAccent = new Audio(duckAccent);
-        // this.duckAccent = new Audio("./DuckAccent.mp3");
-        // this.duckBeat = new Audio(duckBeat);
-
-        //const accent = new UIfx({asset: duckAccent});
     }
 
     handleBpmChange = event => {
         const bpm = event.target.value;
-        this.setState({bpm});
-    }
 
-    // sound = () => {
-    //     const play = useSound(duckAccent);
-    // }
+        if(this.state.on){
+            clearInterval(this.clock);
+            this.clock = setInterval(this.playClick, (60 / bpm) * 1000);
+            this.setState({
+                count: 0,
+                bpm
+            });
+        } else {
+            this.setState({bpm});
+        }
+    }
 
     startStop = () => {
-        // console.log(this.duckAccent);
-        sound.play();
+        if(this.state.on){
+            clearInterval(this.clock);
+            this.setState({
+                on: false
+            });
+        } else {
+            this.clock = setInterval(this.playClick, (60 / this.state.bpm) * 1000);
+            this.setState({
+                count: 0,
+                on: true},
+                this.playClick);
+        }
+    }
+    
+    playClick = () => {
+        const {count, beatsPerMeasure} = this.state;
+
+        if(count % beatsPerMeasure === 0){
+            duckAccent.play();
+        } else {
+            duckBeat.play();
+        }
+        this.setState(state => ({
+            count: (state.count + 1) % state.beatsPerMeasure
+        }));
     }
 
-    render() {
+    render(){
         const {on, bpm} = this.state;
-
-        // const noise = new UIfx(
-        //     {asset: duckAccent}
-        // )
 
         return (
             <div className="metronome">
+                <h1>Metronome City</h1>
                 <div className="bpm-slider">
                     <div>{bpm}BPM</div>
                     <input
@@ -61,5 +82,6 @@ class Metronome extends Component {
         );
     }
 }
+
 
 export default Metronome;
